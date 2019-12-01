@@ -11,6 +11,7 @@
     {q: 'what is C?', c: ['C0', 'C1', 'C2']},
   ];
   let currentNum = 0;
+  let isAnswered;
 
   function shuffle(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
@@ -21,6 +22,11 @@
   }
 
   function checkAnswer(li) {
+    if (isAnswered) {
+      return;
+    }
+    isAnswered = true;
+
     if (li.textContent === quizSet[currentNum].c[0]) {
       li.classList.add('correct');
     } else {
@@ -29,6 +35,8 @@
   }
 
   function setQuiz() {
+    isAnswered = false;
+
     question.textContent = quizSet[currentNum].q;
 
     const shuffledChoices = shuffle([...quizSet[currentNum].c]);
