@@ -32,12 +32,18 @@
     } else {
       li.classList.add('wrong');
     }
+
+    btn.classList.remove('disabled');
   }
 
   function setQuiz() {
     isAnswered = false;
 
     question.textContent = quizSet[currentNum].q;
+
+    while (choices.firstChild) {
+      choices.removeChild(choices.firstChild);
+    }
 
     const shuffledChoices = shuffle([...quizSet[currentNum].c]);
     shuffledChoices.forEach(choice => {
@@ -51,4 +57,9 @@
   }
 
   setQuiz();
+
+  btn.addEventListener('click', () => {
+    currentNum++;
+    setQuiz();
+  });
 }
